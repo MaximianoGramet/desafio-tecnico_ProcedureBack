@@ -7,6 +7,13 @@ export enum TaskStatus {
     CANCELLED = 'CANCELLED'
 }
 
+export enum TaskCategory {
+    SOCIAL = 'interés social',
+    CULTURAL = 'cultural',
+    EDUCATIONAL = 'educativo',
+    BENEFIT = 'beneficio',
+    COMMERCIAL = 'comercial'
+}
 @Entity()
 export class Task {
     @PrimaryGeneratedColumn()
@@ -26,6 +33,15 @@ export class Task {
 
     @Column({ type: 'longtext', nullable: true })
     comment: string;
+
+    @Column({
+        type: "enum",
+        enum: TaskCategory
+    })
+    category: TaskCategory
+
+    @Column("varchar", { length: 128 })
+    localidad: string;
 
     @Column({
         type: "enum",

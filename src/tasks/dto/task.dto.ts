@@ -1,5 +1,5 @@
 import { IsIn, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
-import { TaskStatus } from "../task.entity";
+import { TaskCategory, TaskStatus } from "../task.entity";
 
 export class createTaskDto {
     @IsString()
@@ -21,6 +21,17 @@ export class createTaskDto {
     @IsString()
     @MaxLength(1000, { message: 'Comment is too long. Maximum length is 1000 characters.' })
     comment?: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(128)
+    localidad: string;
+
+    @IsIn(Object.values(TaskCategory))
+    @IsNotEmpty()
+    category: TaskCategory;
+
+
 
     // @IsNotEmpty()
     // dni: string;
@@ -53,4 +64,13 @@ export class updateTaskDto {
     @IsOptional()
     @IsIn([TaskStatus.OPEN, TaskStatus.IN_PROGRESS, TaskStatus.DONE, TaskStatus.CANCELLED])
     status?: TaskStatus;
+
+    @IsOptional()
+    @IsString()
+    @MaxLength(128)
+    localidad?: string;
+
+    @IsOptional()
+    @IsIn(Object.values(TaskCategory))
+    category?: TaskCategory;
 }
