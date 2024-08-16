@@ -18,13 +18,13 @@ export class Task {
     @Column("varchar", { length: 128 })
     email: string
 
-    // @Column({ type: 'longtext' })
-    // dni: string
+    @Column({ type: 'longtext', nullable: true })
+    dni: string
 
     @Column("int")
     age: number
 
-    @Column("longtext", { nullable: true })
+    @Column({ type: 'longtext', nullable: true })
     comment: string;
 
     @Column({

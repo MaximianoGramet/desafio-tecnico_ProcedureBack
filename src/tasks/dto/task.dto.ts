@@ -41,8 +41,8 @@ export class updateTaskDto {
     @MaxLength(3)
     age?: number;
 
-    // @IsOptional()
-    // dni?: string;
+    @IsOptional()
+    dni?: string;
 
     @IsOptional()
     @IsString()

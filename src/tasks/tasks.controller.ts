@@ -1,11 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { createTaskDto, updateTaskDto } from './dto/task.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('tasks')
 export class TasksController {
 
     constructor(private tasksService: TasksService) { }
+
+    @Post("document")
+    @UseInterceptors(FileInterceptor('document'))
+    public async addDocument(@UploadedFile() file: Express.Multer.File): Promise<any> {
+        return this.tasksService.processPdf(file);
+    }
 
     @Get()
     getAllTasks() {
